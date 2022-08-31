@@ -1,13 +1,13 @@
 const app = require ('./src/app.js');
-const pool = require ('./src/pool.js');
+const pool = require ('./src/pool');
 
 pool.connect ({
 
     host: 'localhost',
     port: 5432,
     database: 'socialnetwork2nodeAPI',
-    user: 'dbUsername',
-    password: 'dbPassword'
+    user: 'myDbUsername',
+    password: 'myDbPassword'
   
 })
 
