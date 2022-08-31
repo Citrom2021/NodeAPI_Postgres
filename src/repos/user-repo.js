@@ -1,4 +1,5 @@
 const pool = require('../pool');
+const toCamelCase = require('./utils/to-camel-case')
 //async operation
 
 // Option 3 via static methods -> no need to call instance class
@@ -7,7 +8,26 @@ class UserRepo {
 
         const {rows} = await pool.query(`SELECT * FROM users;`);
 
-        return rows;
+        /*
+        // parsing from _ SQL standard to Js standard camelCase
+        const parsedRows = rows.map( row => {
+            const replaced = {};
+
+            //iterating in rows and replacing _
+            for (let key in row) {
+                const camelCase = key.replace(/([-_][a-z])/gi, ($1) =>
+                $1.toUpperCase().replace('_','')
+                );
+                
+                replaced[camelCase] = row[key];
+            }
+
+            return replaced;
+        });*/
+
+        return toCamelCase(rows);
+        
+        //return parsedRows;
 
         // result.rows // array of results
 
