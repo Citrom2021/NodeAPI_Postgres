@@ -7,8 +7,8 @@ const pool = new pg.Pool({
     host: 'localhost',
     port: 5432,
     database: 'socialnetwork2nodeAPI',
-    user: 'servermyusername',
-    password: 'serverMyPassword'
+    user: 'DBusername',
+    password: 'DBpassword'
   });
 
  module.exports = pool;
