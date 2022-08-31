@@ -6,8 +6,8 @@ pool.connect ({
     host: 'localhost',
     port: 5432,
     database: 'socialnetwork2nodeAPI',
-    user: 'myDbUsername',
-    password: 'myDbPassword'
+    user: 'username',
+    password: 'password'
   
 })
 
