@@ -26,14 +26,20 @@ class UserRepo {
         });*/
 
         return toCamelCase(rows);
-        
+
         //return parsedRows;
 
         // result.rows // array of results
 
     }
 
-    static async findById() {
+    static async findById(id) {
+        // SEC ISSUE to fix jsut test
+        const {rows} = await pool.query(`
+        SELECT * FROM users WHERE id = ${id} LIMIT 1;
+        `);
+
+        return toCamelCase(rows)[0];
 
     }
 
