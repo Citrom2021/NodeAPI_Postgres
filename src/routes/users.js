@@ -26,7 +26,9 @@ router.get('/users/:id', async(req,res) => {
     
 });
 
-router.post('/users', async(req,res) => {});
+router.post('/users', async(req,res) => {
+    console.log(req.body);
+});
 
 router.put('/users/:id', async(req,res) => {});
 

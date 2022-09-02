@@ -29,9 +29,9 @@ const pool = new pg.Pool({
         return this._pool.end();
     }
 
-    // BIG SECURITY ISSUE HERE TO FIX!
-    query(sql) {
-        return this._pool.query(sql);
+    // BIG SECURITY ISSUE HERE TO FIX! -> fixed via params and array in repo
+    query(sql,params) {
+        return this._pool.query(sql, params);
     }
  }
 

@@ -35,10 +35,11 @@ class UserRepo {
 
     static async findById(id) {
         // SEC ISSUE to fix jsut test => http://localhost:3005/users/1;DROP TABLE users; => right now allowed -> SQL injection
+        // SELECT * FROM users WHERE id = ${id} LIMIT 1 -> string concat -> to avoid
         const {rows} = await pool.query(`
-        SELECT * FROM users WHERE id = ${id} LIMIT 1;
-        `);
-
+        SELECT * FROM users WHERE id = $1; 
+        `, [id]); //[id, username]); // SELECT * FROM users WHERE id = $1 AND username = $2;
+        // array to fix SQL injection
         return toCamelCase(rows)[0];
 
     }
