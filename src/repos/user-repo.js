@@ -34,7 +34,7 @@ class UserRepo {
     }
 
     static async findById(id) {
-        // SEC ISSUE to fix jsut test
+        // SEC ISSUE to fix jsut test => http://localhost:3005/users/1;DROP TABLE users; => right now allowed -> SQL injection
         const {rows} = await pool.query(`
         SELECT * FROM users WHERE id = ${id} LIMIT 1;
         `);
