@@ -21,17 +21,54 @@ router.get('/users/:id', async(req,res) => {
     if (user) {
         res.send(user);
     } else {
-        res.send(404);
+        res.sendStatus(404);
     }
     
 });
 
 router.post('/users', async(req,res) => {
-    console.log(req.body);
+    //console.log(req.body);
+
+    const {username, bio} = req.body;
+
+    const user = await UserRepo.insert(username,bio);
+
+    res.send(user);
 });
 
-router.put('/users/:id', async(req,res) => {});
+router.put('/users/:id', async(req,res) => {
+    const { id } = req.params;
+    const {username, bio} = req.body;
+    const user = await UserRepo.update(id,username,bio);
 
-router.delete('/users/:id', async(req,res) => {});
+    res.send(user);
+
+    // request handler
+    if (user) {
+        res.send(user);
+    } else {
+        res.sendStatus(404);
+    }
+
+});
+
+router.delete('/users/:id', async(req,res) => {
+
+    const { id } = req.params;  
+    
+    const user = await UserRepo.delete(id);
+
+    res.send(user);
+
+    // request handler
+    if (user) {
+        res.send(user);
+    } else {
+        res.sendStatus(404);
+    }
+
+
+
+});
 
 module.exports = router;

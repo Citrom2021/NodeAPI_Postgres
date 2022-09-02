@@ -2,7 +2,7 @@ http://localhost:3005/users
 
 ###
 
-http://localhost:3005/users/1;
+http://localhost:3005/users/1
 
 ###
 
@@ -10,6 +10,26 @@ POST http://localhost:3005/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "username":"Emanuel123",
-    "bio":"I am a professor"
+    "username":"Cinthyia2345",
+    "bio":"A hobby chess player"
 }
+
+###
+
+PUT  http://localhost:3005/users/4 HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"Cinthyia",
+    "bio":"A flower enthusiast"
+}
+
+###
+
+
+DELETE  http://localhost:3005/users/1 HTTP/1.1
+Content-Type: application/json
+
+
+
+

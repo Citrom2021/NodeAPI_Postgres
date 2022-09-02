@@ -37,22 +37,41 @@ class UserRepo {
         // SEC ISSUE to fix jsut test => http://localhost:3005/users/1;DROP TABLE users; => right now allowed -> SQL injection
         // SELECT * FROM users WHERE id = ${id} LIMIT 1 -> string concat -> to avoid
         const {rows} = await pool.query(`
-        SELECT * FROM users WHERE id = $1; 
-        `, [id]); //[id, username]); // SELECT * FROM users WHERE id = $1 AND username = $2;
+        SELECT * FROM users WHERE id = $1;`, 
+        [id]); //[id, username]); // SELECT * FROM users WHERE id = $1 AND username = $2;
         // array to fix SQL injection
         return toCamelCase(rows)[0];
 
     }
 
-    static async insert() {
+    static async insert( username, bio) {
+        const {rows} = await pool.query(
+            'INSERT INTO users(username, bio) VALUES ($1, $2) RETURNING *;',
+        [username,bio]
+        );
+
+        return toCamelCase(rows)[0];
 
     }
 
-    static async update() {
+    static async update(id, username, bio) {
+        const {rows} = await pool.query(
+            'UPDATE users SET username = $1, bio = $2 WHERE id = $3 RETURNING *;',
+        [username,bio,id]
+        );
+
+        return toCamelCase(rows)[0];
 
     }
 
-    static async delete(){
+    static async delete(id){
+
+        const {rows} = await pool.query(
+            'DELETE from users WHERE id = $1 RETURNING *;',
+        [id]
+        );
+
+        return toCamelCase(rows)[0];
 
     }
 
